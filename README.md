@@ -232,7 +232,8 @@ This eliminates the need for polling—perfect for long-running processes like b
 | Variable               | Default    | Description                                        |
 | ---------------------- | ---------- | -------------------------------------------------- |
 | `PTY_MAX_BUFFER_LINES` | `50000`    | Maximum lines to keep in output buffer per session |
-| `PTY_WEB_HOSTNAME`     | `::1`      | Hostname for the web server to bind to             |
+| `PTY_WEB_HOSTNAME`     | `::1`      | Hostname for the web server to bind to (IPv6 loopback by default) |
+| `PTY_WEB_PORT`         | `0` (random) | Port for the web server (0 = random port)        |
 
 ### Permissions
 

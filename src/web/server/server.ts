@@ -41,7 +41,7 @@ export class PTYServer implements Disposable {
 
   private startWebServer(): Server<undefined> {
     return Bun.serve({
-      port: 0,
+      port: process.env.PTY_WEB_PORT ? parseInt(process.env.PTY_WEB_PORT, 10) : 0,
       hostname: process.env.PTY_WEB_HOSTNAME ?? '::1',
 
       routes: {

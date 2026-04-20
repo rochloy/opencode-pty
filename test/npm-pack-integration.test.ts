@@ -32,6 +32,7 @@ describe('npm pack integration', () => {
   let tempDir: string
   let packFile: string | null = null
   let serverProcess: ReturnType<typeof Bun.spawn> | null = null
+  let baseURL = ''
 
   afterEach(async () => {
     // Cleanup server process
@@ -137,12 +138,13 @@ describe('npm pack integration', () => {
 
     const port = await waitWithRetry()
     expect(port).not.toBe(0)
+    baseURL = `http://[::1]:${port}`
 
     // Wait for server to be ready
     let retries = 20 // 10 seconds
     while (retries > 0) {
       try {
-        const response = await fetch(`http://localhost:${port}/api/sessions`)
+        const response = await fetch(`${baseURL}/api/sessions`)
         if (response.ok) break
       } catch (error) {
         if (!(error instanceof DOMException) || error.name !== 'AbortError') {
@@ -155,12 +157,12 @@ describe('npm pack integration', () => {
     expect(retries).toBeGreaterThan(0) // Server should be ready
 
     // 5) Fetch assets
-    const assetResponse = await fetch(`http://localhost:${port}/assets/${assetName}`)
+    const assetResponse = await fetch(`${baseURL}/assets/${assetName}`)
     expect(assetResponse.status).toBe(200)
     // Could add more specific checks here, like content-type or specific assets
 
     // 6) Fetch index.html and verify it's the built version
-    const indexResponse = await fetch(`http://localhost:${port}/`)
+    const indexResponse = await fetch(`${baseURL}/`)
     expect(indexResponse.status).toBe(200)
     const indexContent = await indexResponse.text()
     expect(indexContent).not.toContain('main.tsx') // Fails if raw HTML is served
