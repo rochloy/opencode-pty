@@ -3,7 +3,6 @@ node_modules
 
 # output
 out
-dist
 *.tgz
 
 # code coverage
@@ -50,3 +49,4 @@ devenv.local.yaml
 
 # pre-commit
 .pre-commit-config.yaml
+dist/src/web/
