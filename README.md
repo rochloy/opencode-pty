@@ -2,6 +2,16 @@
 
 A plugin for [OpenCode](https://opencode.ai) that provides interactive PTY (pseudo-terminal) management, enabling the AI agent to run background processes, send interactive input, and read output on demand.
 
+## Runtime Compatibility
+
+| Feature | Node.js | Bun |
+|---------|---------|-----|
+| Core PTY tools (`pty_spawn`, `pty_read`, etc.) | ✅ Works | ✅ Works |
+| Web UI (`/pty-open-background-spy`) | ❌ Requires Bun | ✅ Works |
+| Auto-cleanup on session end | ✅ Works | ✅ Works |
+
+**Core PTY tools work on both Node.js and Bun.** The Web UI requires Bun's HTTP server (`Bun.serve()`).
+
 ## Why?
 
 OpenCode's built-in `bash` tool runs commands synchronously—the agent waits for completion. This works for quick commands, but not for:
