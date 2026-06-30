@@ -1,7 +1,8 @@
 import { tool } from '@opencode-ai/plugin'
 import { manager } from '../manager.ts'
 import { formatSessionInfo } from '../formatters.ts'
-import DESCRIPTION from './list.txt'
+import { loadDescription } from '../utils.ts'
+const DESCRIPTION = loadDescription(import.meta.url, 'list.txt')
 
 export const ptyList = tool({
   description: DESCRIPTION,

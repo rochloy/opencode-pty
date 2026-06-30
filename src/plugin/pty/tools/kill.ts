@@ -1,7 +1,7 @@
 import { tool } from '@opencode-ai/plugin'
 import { manager } from '../manager.ts'
-import { buildSessionNotFoundError } from '../utils.ts'
-import DESCRIPTION from './kill.txt'
+import { buildSessionNotFoundError, loadDescription } from '../utils.ts'
+const DESCRIPTION = loadDescription(import.meta.url, 'kill.txt')
 
 export const ptyKill = tool({
   description: DESCRIPTION,

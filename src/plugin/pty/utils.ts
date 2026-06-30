@@ -1,5 +1,19 @@
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, join } from 'node:path'
+
 export function buildSessionNotFoundError(id: string): Error {
   return new Error(`PTY session '${id}' not found. Use pty_list to see active sessions.`)
+}
+
+/**
+ * Load a .txt description file relative to the calling module.
+ * Works at runtime in both Node.js and Bun.
+ */
+export function loadDescription(importMetaUrl: string, txtFileName: string): string {
+  const __filename = fileURLToPath(importMetaUrl)
+  const __dirname = dirname(__filename)
+  return readFileSync(join(__dirname, txtFileName), 'utf-8')
 }
 
 /**

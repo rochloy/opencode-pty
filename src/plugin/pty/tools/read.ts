@@ -1,10 +1,10 @@
 import { tool } from '@opencode-ai/plugin'
 import { manager } from '../manager.ts'
 import { DEFAULT_READ_LIMIT, MAX_LINE_LENGTH } from '../../../shared/constants.ts'
-import { buildSessionNotFoundError } from '../utils.ts'
+import { buildSessionNotFoundError, loadDescription } from '../utils.ts'
 import { formatLine } from '../formatters.ts'
 import type { PTYSessionInfo } from '../types.ts'
-import DESCRIPTION from './read.txt'
+const DESCRIPTION = loadDescription(import.meta.url, 'read.txt')
 
 const NOTIFY_ON_EXIT_REMINDER = [
   `<system_reminder>`,
